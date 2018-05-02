@@ -9,7 +9,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= component :page do %>
+      <%= yield %>
+    <% end %>
 
     <%= javascript_pack_tag 'admin' %>
   </body>

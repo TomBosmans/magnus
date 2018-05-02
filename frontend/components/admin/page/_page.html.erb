@@ -1,0 +1,27 @@
+<!-- navbar -->
+<%= component :navbar %>
+
+<!-- sidebar on medium and small screens -->
+<ul id="slide-out" class="sidenav">
+  <%= component :sidenav %>
+</ul>
+
+<div class="page row">
+  <!-- sidebar on big screens -->
+  <ul class="sidenav sidenav-fixed grey lighten-4">
+    <%= component :sidenav %>
+  </ul>
+
+
+  <!-- main content -->
+  <div class="page__main">
+    <%= yield %>
+  </div>
+</div>
+
+
+
+
+
+
+

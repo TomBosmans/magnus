@@ -1,0 +1,8 @@
+.page,
+.page__main {
+  height: 100%;
+}
+
+.page__main {
+  padding-left: 300px;
+}

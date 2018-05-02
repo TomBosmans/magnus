@@ -1,0 +1,7 @@
+<!-- Dropdown Trigger -->
+<a class='dropdown-trigger <%= trigger_css if defined?(trigger_css) %>' data-target='<%= id %>'><%= title %></a>
+
+<!-- Dropdown Structure -->
+<ul id='<%= id %>' class='dropdown-content <%= dropdown_css if defined?(dropdown_css) %>'>
+  <%= yield %>
+</ul>

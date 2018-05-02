@@ -1,0 +1,9 @@
+.sidenav-fixed {
+  z-index: 1; /* we don't want this above the navbar */
+  box-shadow: unset;
+  margin-top: 64px;
+}
+
+.sidenav {
+  padding-top: 10px;
+}
