@@ -27,7 +27,7 @@ class ComponentGenerator < Rails::Generators::Base
   end
 
   def split_name
-    name.split(/[:,::,\/]/).reject(&:blank?).map(&:underscore)
+    name.split(%r{:,::,\/}).reject(&:blank?).map(&:underscore)
   end
 
   def component_name
@@ -35,7 +35,7 @@ class ComponentGenerator < Rails::Generators::Base
   end
 
   def namespace
-    split_name[0...-1].join("_")
+    split_name[0...-1].join('_')
   end
 
   def namespace?
