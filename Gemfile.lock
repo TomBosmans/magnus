@@ -1,3 +1,24 @@
+GIT
+  remote: https://github.com/TomBosmans/form_object
+  revision: 932773e3414857c09f77dd673705a51846ad45be
+  specs:
+    form_object (0.1.0)
+      rails (~> 5.2.0.rc1)
+
+GIT
+  remote: https://github.com/TomBosmans/groupable.git
+  revision: 04ee2f81c34896f7fe68fb00e169359cf05eb30b
+  specs:
+    groupable (0.1)
+      rails (~> 5.2.0.rc1)
+
+GIT
+  remote: https://github.com/TomBosmans/table_object
+  revision: 9945c98ae06b02985f5f21245bec38537cb584fc
+  specs:
+    table_object (0.1.0)
+      rails (~> 5.2.0.rc2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -102,7 +123,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.4)
     multi_json (1.13.1)
-    nio4r (2.3.0)
+    nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     parallel (1.12.1)
@@ -209,6 +230,8 @@ DEPENDENCIES
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
   erd
+  form_object!
+  groupable!
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
@@ -219,6 +242,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  table_object!
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker

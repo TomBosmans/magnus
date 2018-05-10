@@ -27,6 +27,13 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# One group to group them all!
+gem 'groupable', git: 'https://github.com/TomBosmans/groupable.git'
+# Create html tables with ruby objects
+gem 'table_object', git: 'https://github.com/TomBosmans/table_object'
+# Create form with ruby objects
+gem 'form_object', git: 'https://github.com/TomBosmans/form_object'
+
 group :development, :test do
   gem 'annotate'
   gem 'erd'
