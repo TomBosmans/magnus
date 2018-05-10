@@ -27,7 +27,7 @@ class ComponentGenerator < Rails::Generators::Base
   end
 
   def split_name
-    name.split(%r{:,::,\/}).reject(&:blank?).map(&:underscore)
+    name.split(/[:,::,\/]/).reject(&:blank?).map(&:underscore)
   end
 
   def component_name
