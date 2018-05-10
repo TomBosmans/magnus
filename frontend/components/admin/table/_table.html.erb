@@ -1,0 +1,21 @@
+<%= render "components/admin/table/table_actions", table_actions: table_object.table_actions %>
+
+<table>
+  <thead>
+    <tr>
+      <% table_object.columns.each do |column| %>
+	<th><%= column.label %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% table_object.resources.each do |resource|%>
+      <tr>
+	<%= table_object.columns.each do |column|%>
+	  <td><%= column.value_for(resource) %></td>
+	<% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

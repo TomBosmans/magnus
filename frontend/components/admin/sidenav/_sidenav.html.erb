@@ -2,6 +2,13 @@
 <li><a href="#!"><i class="material-icons">supervisor_account</i>Users</a></li>
 <li><div class="divider"></div></li>
 
-<li><a class="subheader">Groups</a></li>
-<li><a href="#!">Articles</a></li>
-<li><a href="#!">Reviews</a></li>
+<li><a hred="" class="subheader">Groups</a></li>
+
+<% content.each do |item| %>
+  <li>
+    <%= link_to [:admin, item] do %>
+      <i class="material-icons"><%= icon_for(item.class) %></i>
+      <%= item.name %>
+    <% end %>
+  </li>
+<% end %>

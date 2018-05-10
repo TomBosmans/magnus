@@ -1,0 +1,5 @@
+<%= form_for admin_group_articles_path(form_object.article, group_id: 1) do |form| %>
+  <% form_object.fields.each do |field| %>
+    <%= render "components/admin/form/inputs/#{field.type}", form: form, field: field %>
+  <% end %>
+<% end %>

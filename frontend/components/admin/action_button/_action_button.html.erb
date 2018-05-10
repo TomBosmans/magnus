@@ -1,0 +1,20 @@
+<div class="fixed-action-btn">
+  <% if defined? actions %>
+    <a class="btn-floating btn-large">
+      <i class="large material-icons"><%= icon %></i>
+    </a>
+    <ul>
+      <% actions.each do |action_path, action_icon| %>
+	<li>
+	  <%= link_to action_path, class: 'btn-floating' do %>
+	    <i class="material-icons"><%= action_icon %></i>
+	  <% end %>
+	</li>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= link_to path, class: 'btn-floating btn-large' do %>
+      <i class="large material-icons"><%= icon %></i>
+    <% end %>
+  <% end %>
+</div>
