@@ -1,0 +1,10 @@
+<div class="file-field">
+  <div class="btn">
+    <%= field.label %>
+    <%= form.file_field field.full_name, class: "#{'invalid' if invalid} #{field.options[:css_class]}", multiple: field.options[:multiple] %>
+  </div>
+  <div class="file-path-wrapper">
+    <input class="file-path validate" type="text" placeholder=<%= field.options[:placeholder] %>>
+  </div>
+</div>
+

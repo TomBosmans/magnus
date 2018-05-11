@@ -1,0 +1,24 @@
+<% invalid = form.object.errors.include?(field.full_name) %>
+
+<div class="row">
+  <div class="input-field col s12">
+    <!-- icon -->
+    <% if field.options[:icon] %>
+      <i class="material-icons prefix"><%= field.options[:icon] %></i>
+    <% end %>
+
+    <!-- input -->
+    <%= render "components/admin/input/types/#{field.type}", form: form, field: field, invalid: invalid %>
+
+    <!-- helper text -->
+    <% if invalid %>
+      <span class="input-field__error helper-text">
+	<%= form.object.errors.messages.values.join(', ') %>
+      </span>
+    <% else %>
+      <% if field.options[:helper_text] %>
+	<span class="helper-text"><%= field.options[:helper_text] %></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

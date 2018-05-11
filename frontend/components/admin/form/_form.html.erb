@@ -1,5 +1,16 @@
-<%= form_for admin_group_articles_path(form_object.article, group_id: 1) do |form| %>
+<%= form_for form_object, url: url do |form| %>
+  <!-- fields -->
   <% form_object.fields.each do |field| %>
-    <%= render "components/admin/form/inputs/#{field.type}", form: form, field: field %>
+    <%= component :input, form: form, field: field %>
   <% end %>
+
+  <div class="row center-align">
+    <!-- cancel -->
+    <%= link_to t('actions.cancel'), url_for(action: 'index'), class: 'waves-effect waves-teal btn-flat' %>
+
+    <!-- submit -->
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      <%= t('actions.submit') %>
+    </button>
+  </div>
 <% end %>

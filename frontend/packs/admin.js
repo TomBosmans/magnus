@@ -6,3 +6,5 @@ import "components/admin/sidenav/sidenav";
 import "components/admin/page/page";
 import "components/admin/table/table";
 import "components/admin/action_button/action_button";
+import "components/admin/form/form";
+import "components/admin/input/input";
