@@ -7,6 +7,10 @@ module ApplicationHelper
     render "components/#{namespace}/#{component_name}/#{component_name}", locals, &block
   end
 
+  def current_path?(path)
+    url_for == url_for(path)
+  end
+
   ICONS_FOR_CLASS = {
     Group => 'folder'
   }.freeze

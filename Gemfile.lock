@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/TomBosmans/form_object
-  revision: 932773e3414857c09f77dd673705a51846ad45be
+  revision: b87a99323e76de0cae3ccf3526a9193373ae5d28
   specs:
     form_object (0.1.0)
       rails (~> 5.2.0.rc1)

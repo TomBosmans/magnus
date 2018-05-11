@@ -5,8 +5,9 @@
 <li><a hred="" class="subheader">Groups</a></li>
 
 <% content.each do |item| %>
-  <li>
-    <%= link_to [:admin, item] do %>
+  <% path = [:admin, item] %>
+  <li class="<%= 'active' if current_path?(path) %>">
+    <%= link_to path do %>
       <i class="material-icons"><%= icon_for(item.class) %></i>
       <%= item.name %>
     <% end %>
