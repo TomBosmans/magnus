@@ -6,3 +6,9 @@
 .page__main {
   padding-left: 300px;
 }
+
+@media only screen and (max-width: 992px) {
+  .page__main {
+    padding-left: 0;
+  }
+}
