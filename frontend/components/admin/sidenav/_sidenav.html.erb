@@ -7,7 +7,7 @@
 <% content.each do |item| %>
   <% path = [:admin, item] %>
   <li class="<%= 'active' if current_path?(path) %>">
-    <%= link_to path do %>
+    <%= link_to path, class: 'waves-effect' do %>
       <i class="material-icons"><%= icon_for(item.class) %></i>
       <%= item.name %>
     <% end %>

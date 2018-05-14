@@ -25,7 +25,7 @@
 	  <% table_object.resource_actions.each do |action| %>
 	    <%= link_to action.options[:path].call(resource),
 	                method: action.options[:method],
-	                class: "waves-effect waves-teal btn-flat #{action.options[:css_class]}" do %>
+	                class: "waves-effect btn-flat #{action.options[:css_class]}" do %>
 	      <i class="material-icons"><%= action.options[:icon] %></i>
 	    <% end %>
 	  <% end %>

@@ -1,21 +1,21 @@
 <div class="fixed-action-btn">
   <% if defined? actions %>
-    <a class="btn-floating btn-large">
+    <a class="btn-floating btn-large waves-effect waves-light">
       <i class="large material-icons"><%= icon %></i>
     </a>
     <ul>
       <% actions.each do |_name, options| %>
 	<li>
 	  <%= link_to options[:path],
-	               method: options[:method],
-	               class: "btn-floating #{options[:css_class]}" do %>
+	              method: options[:method],
+	              class: "btn-floating waves-effect waves-light #{options[:css_class]}" do %>
 	    <i class="material-icons"><%= options[:icon] %></i>
 	  <% end %>
 	</li>
       <% end %>
     </ul>
   <% else %>
-    <%= link_to path, class: 'btn-floating btn-large' do %>
+    <%= link_to path, class: 'btn-floating btn-large waves-effect waves-light' do %>
       <i class="large material-icons"><%= icon %></i>
     <% end %>
   <% end %>
