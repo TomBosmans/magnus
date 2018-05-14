@@ -1,20 +1,7 @@
 class Admin::ArticlesController < AdminController
   def show
-    @article = Article.find(params[:id])
-
-    @actions = {
-      destroy: {
-        path: [:admin, @article],
-        icon: 'delete',
-        method: 'DELETE',
-        css_class: 'red'
-      },
-      edit: {
-        path: [:edit, :admin, @article],
-        icon: 'edit',
-        css_class: 'orange'
-      }
-    }
+    article = Article.find(params[:id])
+    @presenter = ArticlePresenter.new(article)
   end
 
   def new

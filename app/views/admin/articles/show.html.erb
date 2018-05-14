@@ -1,8 +1,8 @@
-<%= component :action_button, icon: 'more_vert', actions: @actions %>
+<%= component :action_button, icon: 'more_vert', actions: @presenter.action_buttons %>
 
-<h4><%= @article.name %></h4>
-<span><%= @article.description %></span>
+<h4><%= @presenter.name %></h4>
+<span><%= @presenter.description %></span>
 
-<%= @article.content %>
+<%= @presenter.content %>
 
 
