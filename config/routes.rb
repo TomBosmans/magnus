@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'dashboard#index'
     resources :dashboard, only: %w[index]
-    resources :articles
+    resources :articles, except: [:index]
 
     resources :groups, only: %w[show] do
-      resources :articles
+      resources :articles, only: [:new, :create]
     end
   end
 

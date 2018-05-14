@@ -6,6 +6,11 @@
       <% table_object.columns.each do |column| %>
 	<th><%= column.label %></th>
       <% end %>
+
+      <%# if there are resource actions we want it to have an empty table header %>
+      <% if table_object.resource_actions.any? %>
+	<th></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -15,6 +20,16 @@
 	<% table_object.columns.each do |column|%>
 	  <td><%= column.value_for(resource) %></td>
 	<% end %>
+
+	<td class="right-align">
+	  <% table_object.resource_actions.each do |action| %>
+	    <%= link_to action.options[:path].call(resource),
+	                method: action.options[:method],
+	                class: "waves-effect waves-teal btn-flat #{action.options[:css_class]}" do %>
+	      <i class="material-icons"><%= action.options[:icon] %></i>
+	    <% end %>
+	  <% end %>
+	</td>
       </tr>
     <% end %>
   </tbody>

@@ -1,7 +1,13 @@
 <% if table_actions.many? %>
   <%= component :action_button,
                 icon: 'more_vert',
-		actions: table_actions.each_with_object(Hash.new(0)) { |action, hash| hash[action.path] = action.options[:icon] } %>
+		actions: table_actions.each_with_object(Hash.new(0)) do
+		  |action, hash| hash[action.name] = {
+		    path: action.options[:path],
+		    icon: action.options[:icon],
+		    method: action.options[:method]
+		  }
+                end %>
 <% elsif table_actions.any? %>
   <%= component :action_button,
                 icon: 'add',

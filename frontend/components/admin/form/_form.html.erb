@@ -1,4 +1,4 @@
-<%= form_for form_object, url: url do |form| %>
+<%= form_for form_object, url: url, method: method do |form| %>
   <!-- fields -->
   <% form_object.fields.each do |field| %>
     <%= component :input, form: form, field: field %>
@@ -6,7 +6,7 @@
 
   <div class="row center-align">
     <!-- cancel -->
-    <%= link_to t('actions.cancel'), url_for(action: 'index'), class: 'waves-effect waves-teal btn-flat' %>
+    <%= link_to t('actions.cancel'), url_for(:back), class: 'waves-effect waves-teal btn-flat' %>
 
     <!-- submit -->
     <button class="btn waves-effect waves-light" type="submit" name="action">

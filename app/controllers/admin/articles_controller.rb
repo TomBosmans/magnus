@@ -1,6 +1,20 @@
 class Admin::ArticlesController < AdminController
-  def index
-    redirect_to [:admin, group]
+  def show
+    @article = Article.find(params[:id])
+
+    @actions = {
+      destroy: {
+        path: [:admin, @article],
+        icon: 'delete',
+        method: 'DELETE',
+        css_class: 'red'
+      },
+      edit: {
+        path: [:edit, :admin, @article],
+        icon: 'edit',
+        css_class: 'orange'
+      }
+    }
   end
 
   def new
@@ -13,10 +27,35 @@ class Admin::ArticlesController < AdminController
 
     if @form_object.valid?(article: @article)
       @article.save
-      redirect_to [:admin, group]
+      redirect_to [:admin, @article]
     else
       render :new
     end
+  end
+
+  def edit
+    article = Article.find(params[:id])
+    @form_object = ArticleForm.new(article: article)
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    @form_object = ArticleForm.new(article_form_params)
+    @article.attributes = @form_object.article_attributes
+
+    if @form_object.valid?(article: @article)
+      @article.update_attributes(@form_object.article_attributes)
+      redirect_to [:admin, @article]
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @article = Article.find(params[:id])
+    group = @article.group
+    @article.destroy
+    redirect_to [:admin, group]
   end
 
   private

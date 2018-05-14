@@ -4,10 +4,12 @@
       <i class="large material-icons"><%= icon %></i>
     </a>
     <ul>
-      <% actions.each do |action_path, action_icon| %>
+      <% actions.each do |_name, options| %>
 	<li>
-	  <%= link_to action_path, class: 'btn-floating' do %>
-	    <i class="material-icons"><%= action_icon %></i>
+	  <%= link_to options[:path],
+	               method: options[:method],
+	               class: "btn-floating #{options[:css_class]}" do %>
+	    <i class="material-icons"><%= options[:icon] %></i>
 	  <% end %>
 	</li>
       <% end %>

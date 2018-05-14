@@ -1,2 +1,2 @@
 <h4><%= @form_object.model_name.human %></h4>
-<%= component :form, form_object: @form_object, url: url_for(action: 'create') %>
+<%= component :form, form_object: @form_object, url: url_for(action: 'create'), method: 'POST' %>
