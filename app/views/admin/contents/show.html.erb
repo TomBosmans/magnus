@@ -1,0 +1,28 @@
+<% if @presenter.action_buttons.many? %>
+  <%= component :action_button, icon: 'more_vert',
+                                actions: @presenter.action_buttons %>
+<% else %>
+  <%= component :action_button, icon: @presenter.action_buttons.values[0][:icon],
+                                path: @presenter.action_buttons.values[0][:path],
+				options: @presenter.action_buttons.values[0][:options] %>
+<% end %>
+
+<h4><%= @presenter.name %></h4>
+<table class="show-table">
+  <thead>
+    <tr>
+      <% @presenter.fields.each do |label, value| %>
+	<th><%= label %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @presenter.fields.each do |label, value| %>
+	<td><%= value %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<%= @presenter.text %>

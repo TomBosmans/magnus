@@ -15,7 +15,8 @@
       <% end %>
     </ul>
   <% else %>
-    <%= link_to path, class: 'btn-floating btn-large waves-effect waves-light' do %>
+    <% options ||= {} %>
+    <%= link_to path, class: "btn-floating btn-large waves-effect waves-light #{options[:css_class]}" do %>
       <i class="large material-icons"><%= icon %></i>
     <% end %>
   <% end %>

@@ -1,0 +1,12 @@
+<%= component :action_button, path: edit_admin_setting_path(setting), icon: 'edit', options: { css_class: 'orange' } %>
+
+<h4><%= Setting.model_name.human.pluralize %></h4>
+
+<ul class="collection">
+  <% setting.application.each do |key, value| %>
+    <li class="collection-item">
+      <label class="title"><%= key.humanize %>:</label>
+      <span><%= value %></span>
+    </li>
+  <% end %>
+</ul>

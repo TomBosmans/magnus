@@ -1,1 +1,68 @@
-/* keep */
+table.show-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  position: relative;
+}
+
+table.show-table td:empty::before {
+  content: "\00a0";
+}
+
+table.show-table th,
+table.show-table td {
+  margin: 0;
+  vertical-align: top;
+}
+
+table.show-table th {
+  text-align: left;
+}
+
+table.show-table thead {
+  display: block;
+  float: left;
+}
+
+table.show-table thead tr {
+  display: block;
+  padding: 0 10px 0 0;
+}
+
+table.show-table thead tr th::before {
+  content: "\00a0";
+}
+
+table.show-table tbody {
+  display: block;
+  width: auto;
+  position: relative;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+table.show-table tbody tr {
+  display: inline-block;
+  vertical-align: top;
+}
+
+table.show-table th {
+  display: block;
+  text-align: right;
+}
+
+table.show-table td {
+  display: block;
+  min-height: 1.25em;
+  text-align: left;
+}
+
+table.show-table tr {
+  border-bottom: none;
+  padding: 0 10px;
+}
+
+table.show-table thead {
+  border: 0;
+}

@@ -1,0 +1,5 @@
+<%= form.label field.full_name, field.label %>
+<%= form.text_field field.full_name, type: 'color',
+                                     class: "#{'invalid' if invalid} #{field.options[:css_class]}",
+				     data: field.options[:data] %>
+

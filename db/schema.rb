@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_03_081739) do
+ActiveRecord::Schema.define(version: 2018_05_15_153049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,10 +36,11 @@ ActiveRecord::Schema.define(version: 2018_05_03_081739) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "articles", force: :cascade do |t|
+  create_table "contents", force: :cascade do |t|
     t.string "name"
-    t.string "description"
-    t.string "content"
+    t.string "type"
+    t.jsonb "fields", default: {}, null: false
+    t.jsonb "options", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,6 +58,12 @@ ActiveRecord::Schema.define(version: 2018_05_03_081739) do
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.jsonb "application", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

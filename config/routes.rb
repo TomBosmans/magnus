@@ -1,11 +1,21 @@
 Rails.application.routes.draw do
   namespace :admin do
     root to: 'dashboard#index'
+    resources :settings, only: [:show, :edit, :update]
     resources :dashboard, only: %w[index]
-    resources :articles, except: [:index, :new, :create]
+
+    Content.types.each do |klass|
+      resources klass.to_s.underscore, controller: 'contents',
+                                       type: klass.to_s,
+                                       except: [:index, :new, :create]
+    end
 
     resources :groups, only: %w[show] do
-      resources :articles, only: [:new, :create]
+      Content.types.each do |klass|
+        resources klass.to_s.underscore, controller: 'contents',
+                                         type: klass.to_s,
+                                         only: [:new, :create]
+      end
     end
   end
 

@@ -15,8 +15,8 @@ class GroupTable < ApplicationTable
   column :name,
          label: 'Name'
 
-  column :description,
-         label: 'Description'
+  column :type,
+         label: 'Type'
 
   resource_action :show,
                   icon: 'visibility',

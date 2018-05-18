@@ -3,7 +3,23 @@
 
 # Shown on the sidenav
 
-ContentGroup.create(
+Setting.create(
+  name: 'Magnus',
+  description: 'Back end for your front end'
+)
+
+content = Group.create(
+  name: 'content'
+)
+
+Page.create(
+  name: 'about me',
+  text: 'some info about yourself',
+  group: content
+)
+
+reviews = Group.create(
   name: 'Reviews',
-  description: 'reviews about things.'
+  description: 'all my reviews about stuff',
+  group: content
 )

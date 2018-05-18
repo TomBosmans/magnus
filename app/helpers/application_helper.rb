@@ -4,7 +4,8 @@ module ApplicationHelper
   end
 
   def component(component_name, locals = {}, &block)
-    render "components/#{namespace}/#{component_name}/#{component_name}", locals, &block
+    render "components/#{namespace}/#{component_name}/#{component_name}",
+           locals, &block
   end
 
   def current_path?(path)

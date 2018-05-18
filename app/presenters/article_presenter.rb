@@ -3,10 +3,16 @@ class ArticlePresenter
 
   attr_accessor :article
 
-  delegate :name, :description, :content, to: :article
+  delegate :name, :description, :text, to: :article
 
   def initialize(article)
     self.article = article
+  end
+
+  def fields
+    {
+      article.class.human_attribute_name(:description) => description
+    }
   end
 
   def action_buttons
