@@ -20,6 +20,11 @@ Rails.application.routes.draw do
                                          only: [:new, :create]
       end
     end
+
+    admin_root_path = 'dashboard#index'
+    root to: admin_root_path
+    # If a path does not exist we will return the user back to the admin root.
+    match '*path', to: admin_root_path, via: :all
   end
 
   # Everything in here uses controller public/*
