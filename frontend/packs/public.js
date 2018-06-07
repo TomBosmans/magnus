@@ -1,1 +1,2 @@
-import "init/public_init";
+import "init/public";
+import "components/admin/flash_messages/flash_messages";

@@ -9,6 +9,10 @@ module ComponentHelper
            locals, &block
   end
 
+  def flash_messages(locals = {}, &block)
+    render 'components/admin/flash_messages/flash_messages', locals, &block
+  end
+
   # This helper is here for when no options are passed to a component.
   # This prevents to need to initialize an empty option in every component :)
   # TODO: find this a better home

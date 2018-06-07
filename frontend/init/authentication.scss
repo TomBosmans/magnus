@@ -1,0 +1,16 @@
+@import "frontend/lib/materialize";
+
+html {
+  display: table;
+  margin: auto;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+  background-color: $primary-color;
+}
+
+html, body {
+  height: 100%;
+}

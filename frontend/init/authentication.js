@@ -3,7 +3,7 @@ import Rails from "rails-ujs";
 
 import "materialize-css/dist/js/materialize";
 import "material-design-icons/iconfont/material-icons.css";
-import "./admin_init.scss";
+import "./authentication.scss";
 
 Rails.start();
 // Turbolinks.start();
