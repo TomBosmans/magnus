@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= application.name %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'authentication' %>
+  </head>
+
+  <body>
+    <%= component :page do %>
+      <%= yield %>
+    <% end %>
+
+    <%= javascript_pack_tag 'authentication' %>
+  </body>
+</html>

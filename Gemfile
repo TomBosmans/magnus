@@ -33,6 +33,8 @@ gem 'groupable', git: 'https://github.com/TomBosmans/groupable.git'
 gem 'table_object', git: 'https://github.com/TomBosmans/table_object'
 # Create form with ruby objects
 gem 'form_object', git: 'https://github.com/TomBosmans/form_object'
+# Flexible authentication solution for Rails with Warden.
+gem 'devise'
 
 group :development, :test do
   gem 'annotate'
