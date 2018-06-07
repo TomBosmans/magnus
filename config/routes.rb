@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
-    root to: 'dashboard#index'
     resources :settings, only: [:show, :edit, :update]
-    resources :users, only: [:index]
+    resources :users, only: [:index, :new, :create, :destroy]
     resources :dashboard, only: [:index]
 
     Content.types.each do |klass|

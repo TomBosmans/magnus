@@ -1,1 +1,2 @@
-index
+<h4><%= t(@table_object.name, scope: [:table_objects, :names]) %></h4>
+<%= component :table, table_object: @table_object %>

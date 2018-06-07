@@ -4,11 +4,10 @@ class User < ApplicationRecord
   ROLES = [:admin, :creator].freeze
 
   # Include default devise modules. Others available are:
-  # :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
+  # :registerable, :recoverable, :trackable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
-         :recoverable,
          :rememberable,
-         :trackable,
          :validatable
 
   validates :role, inclusion: { in: ROLES.map(&:to_s) }

@@ -8,7 +8,13 @@
 </li>
 
 <!-- Users -->
-<li><a href="#!"><i class="material-icons">supervisor_account</i>Users</a></li>
+<% path = admin_users_path %>
+<li class="<%= 'active' if current_path?(path) %>">
+  <a href="<%= path %>" class="waves-effect">
+    <i class="material-icons">supervisor_account</i>
+    <%= User.model_name.human.pluralize %>
+  </a>
+</li>
 
 <li><div class="divider"></div></li>
 

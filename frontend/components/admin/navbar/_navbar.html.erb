@@ -7,7 +7,18 @@
       </div>
       <a href="#!" class="brand-logo"><%= setting.name %></a>
       <ul class="right">
-        <li><a href="#">Account</a></li>
+	<%= component :dropdown, id: 'account', title: current_user.email do %>
+	  <li>
+	    <%= link_to edit_admin_user_path(current_user) do %>
+	      <i class="material-icons">edit</i><%= t('edit_profile') %>
+	    <% end %>
+	  </li>
+	  <li>
+	    <%= link_to destroy_user_session_path, method: :delete do %>
+	      <i class="material-icons">exit_to_app</i><%= t('sign_out') %>
+	    <% end %>
+	  </li>
+	<% end %>
       </ul>
     </div>
   </nav>
