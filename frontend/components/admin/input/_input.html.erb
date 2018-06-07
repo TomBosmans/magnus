@@ -13,7 +13,7 @@
     <!-- helper text -->
     <% if invalid %>
       <span class="input-field__error helper-text">
-	<%= form.object.errors.messages.values.join(', ') %>
+	<%= form.object.errors.messages[field.full_name.to_sym].join(', ') %>
       </span>
     <% else %>
       <% if field.options[:helper_text] %>
