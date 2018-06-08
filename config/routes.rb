@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :settings, only: [:show, :edit, :update]
-    resources :users, only: [:index, :new, :create, :destroy]
     resources :dashboard, only: [:index]
+    resources :users, only: [:index, :new, :create, :destroy] do
+      resource :password, only: [:edit, :update]
+    end
 
     Content.types.each do |klass|
       resources klass.to_s.underscore, controller: 'contents',
