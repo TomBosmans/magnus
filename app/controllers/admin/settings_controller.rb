@@ -21,8 +21,6 @@ class Admin::SettingsController < AdminController
     params.require(:setting_form).permit(
       :setting_name,
       :setting_description,
-      :setting_primary_color,
-      :setting_secondary_color
     )
   end
 end

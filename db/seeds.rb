@@ -14,15 +14,3 @@ Setting.create(
 content = Group.create(
   name: 'content'
 )
-
-Page.create(
-  name: 'about me',
-  text: 'some info about yourself',
-  group: content
-)
-
-reviews = Group.create(
-  name: 'Reviews',
-  description: 'all my reviews about stuff',
-  group: content
-)
