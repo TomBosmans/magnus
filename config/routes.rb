@@ -9,16 +9,18 @@ Rails.application.routes.draw do
     end
 
     Content.types.each do |klass|
-      resources klass.to_s.underscore, controller: 'contents',
-                                       type: klass.to_s,
-                                       except: [:index, :new, :create]
+      resources klass.to_s.underscore.gsub('/', '_'),
+                controller: 'contents',
+                type: klass.to_s,
+                except: [:index, :new, :create]
     end
 
     resources :groups, only: %w[show] do
       Content.types.each do |klass|
-        resources klass.to_s.underscore, controller: 'contents',
-                                         type: klass.to_s,
-                                         only: [:new, :create]
+        resources klass.to_s.underscore.gsub('/', '_'),
+                  controller: 'contents',
+                  type: klass.to_s,
+                  only: [:new, :create]
       end
     end
 
