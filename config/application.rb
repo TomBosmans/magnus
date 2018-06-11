@@ -12,7 +12,6 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
-require 'apartment/elevators/subdomain'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -36,7 +35,5 @@ module Magnus
       g.helper          false
       g.channel         assets: false
     end
-
-    config.middleware.use Apartment::Elevators::Subdomain
   end
 end
