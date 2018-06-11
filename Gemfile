@@ -35,6 +35,8 @@ gem 'table_object', git: 'https://github.com/TomBosmans/table_object'
 gem 'form_object', git: 'https://github.com/TomBosmans/form_object'
 # Flexible authentication solution for Rails with Warden.
 gem 'devise'
+# Database multi-tenancy for Rack (and Rails) applications
+gem 'apartment'
 
 group :development, :test do
   gem 'annotate'
