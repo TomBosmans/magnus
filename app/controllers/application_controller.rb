@@ -4,17 +4,10 @@ class ApplicationController < ActionController::Base
   helper_method :content, :current_tenant
 
   def content
-    @content ||= find_content
+    @content ||= Group.find_by(name: 'content').items
   end
 
   def current_tenant
-    @current_tenant ||= Apartment::Tenant.current
-  end
-
-  private
-
-  def find_content
-    group = Group.find_by(name: 'content')
-    group.items
+    @current_tenant ||= Tenant.find_by(subdomain: Apartment::Tenant.current)
   end
 end
