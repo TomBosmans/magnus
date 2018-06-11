@@ -1,16 +1,15 @@
 class ApplicationController < ActionController::Base
   prepend_view_path Rails.root.join('frontend')
 
-  helper_method :content, :setting, :application
+  helper_method :content, :current_tenant
 
   def content
     @content ||= find_content
   end
 
-  def setting
-    @setting ||= Setting.first
+  def current_tenant
+    @current_tenant ||= Apartment::Tenant.current
   end
-  alias_method :application, :setting
 
   private
 

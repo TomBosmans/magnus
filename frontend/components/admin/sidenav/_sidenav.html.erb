@@ -1,12 +1,3 @@
-<!-- Settings -->
-<% path = admin_setting_path(setting) %>
-<li class="<%= 'active' if current_path?(path) %>">
-  <a href="<%= path %>" class="waves-effect">
-    <i class="material-icons">settings</i>
-    <%= Setting.model_name.human.pluralize %>
-  </a>
-</li>
-
 <!-- Users -->
 <% path = admin_users_path %>
 <li class="<%= 'active' if current_path?(path) %>">

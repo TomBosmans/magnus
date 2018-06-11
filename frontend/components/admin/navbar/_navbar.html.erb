@@ -5,7 +5,7 @@
       <div class="hide-on-large-only">
 	<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       </div>
-      <a href="#!" class="brand-logo"><%= setting.name %></a>
+      <a href="#!" class="brand-logo"><%= current_tenant.name %></a>
       <ul class="right">
 	<%= component :dropdown, id: 'account', title: current_user.email do %>
 	  <li>
