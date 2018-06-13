@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       end
 
       Content.types.each do |klass|
-        resources klass.to_s.underscore.gsub('/', '_'),
+        resources klass.to_s.underscore.gsub('/', '_').pluralize,
                   controller: 'contents',
                   type: klass.to_s,
                   except: [:index, :new, :create]
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
       resources :groups, only: %w[show] do
         Content.types.each do |klass|
-          resources klass.to_s.underscore.gsub('/', '_'),
+          resources klass.to_s.underscore.gsub('/', '_').pluralize,
                     controller: 'contents',
                     type: klass.to_s,
                     only: [:new, :create]
@@ -32,6 +32,19 @@ Rails.application.routes.draw do
       root to: admin_root_path
       # If a path does not exist we will return the user back to the admin root.
       match '*path', to: admin_root_path, via: :all
+    end
+
+    namespace :api do
+      namespace :v1 do
+        resources :groups, only: [:show, :index]
+
+        Content.types.each do |klass|
+          resources klass.to_s.underscore.gsub('/', '_').pluralize,
+                    controller: 'contents',
+                    type: klass.to_s,
+                    only: [:show, :index]
+        end
+      end
     end
   end
 

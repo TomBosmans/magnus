@@ -3,6 +3,7 @@ class Content < ApplicationRecord
 
   # Add all content types in this Array.
   TYPES = [
+    Article
   ].freeze
 
   def self.types

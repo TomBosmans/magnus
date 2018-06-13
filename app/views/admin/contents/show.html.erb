@@ -1,7 +1,7 @@
 <% if @presenter.action_buttons.many? %>
   <%= component :action_button, icon: 'more_vert',
                                 actions: @presenter.action_buttons %>
-<% else %>
+<% elsif @presenter.action_buttons.any? %>
   <%= component :action_button, icon: @presenter.action_buttons.values[0][:icon],
                                 path: @presenter.action_buttons.values[0][:path],
 				options: @presenter.action_buttons.values[0][:options] %>
@@ -25,4 +25,4 @@
   </tbody>
 </table>
 
-<%= @presenter.text %>
+<%= @presenter.body %>
