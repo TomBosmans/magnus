@@ -1,4 +1,5 @@
 class ArticleForm < ApplicationForm
-  field :title
-  field :body, type: :text
+  field :name
+  field :description, type: :text
+  field :text, type: :text
 end
