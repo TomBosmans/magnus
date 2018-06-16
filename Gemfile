@@ -37,6 +37,8 @@ gem 'form_object', git: 'https://github.com/TomBosmans/form_object'
 gem 'devise'
 # Database multi-tenancy for Rack (and Rails) applications
 gem 'apartment'
+# Rack Middleware for handling Cross-Origin Resource Sharing (CORS), which makes cross-origin AJAX possible.
+gem 'rack-cors'
 
 group :development, :test do
   gem 'annotate'
