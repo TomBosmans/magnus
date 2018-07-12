@@ -1,8 +1,6 @@
 require './lib/subdomain_constraint.rb'
 
 Rails.application.routes.draw do
-  root to: 'public/welcome#index'
-
   constraints SubdomainConstraint do
     root to: 'admin/dashboard#index'
 
@@ -55,4 +53,6 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :welcome, only: [:index]
   end
+
+  root to: 'public/welcome#index'
 end
