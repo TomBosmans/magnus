@@ -62,12 +62,6 @@ ActiveRecord::Schema.define(version: 2018_06_11_120314) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "settings", force: :cascade do |t|
-    t.jsonb "application", default: {}, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tenants", force: :cascade do |t|
     t.string "name"
     t.string "description"
