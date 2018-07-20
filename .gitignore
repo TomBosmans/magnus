@@ -29,4 +29,6 @@ yarn-debug.log*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/database.yml
+/config/initializers/environment_variables.rb
+# this will be generated after deploying.
+/config/nginx.conf
