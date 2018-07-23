@@ -1,9 +1,9 @@
 # Change these
-server '174.138.10.49', port: 22, roles: [:web, :app, :db], primary: true
+server ENV['SERVER_IP'], port: ENV.fetch('SERVER_PORT', 22).to_i, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@github.com:TomBosmans/magnus.git'
-set :application,     'magnus'
-set :user,            'tom'
+set :repo_url,        ENV['REPO_URL']
+set :application,     ENV['APPLICATION_NAME']
+set :user,            ENV['SERVER_USER']
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
@@ -31,7 +31,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-set :linked_files, %w{config/master.key config/database.yml}
+set :linked_files, ENV['SERVER_SHARED_FILES'].split(',')
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
@@ -73,8 +73,18 @@ namespace :deploy do
     end
   end
 
+  desc 'Generate nginx.config'
+  task :generate_nginx_conf do
+    on roles(:app) do
+      execute :bundle, 'exec rails g nginx_conf'
+      execute :nginx,  '-t'
+      execute :nginx,  '-s reload'
+    end
+  end
+
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
+  after  :finishing,    :generate_nginx_conf
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end

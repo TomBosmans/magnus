@@ -1,4 +1,5 @@
 require 'erb'
+require 'server_names'
 
 class NginxConfGenerator < Rails::Generators::Base
   desc 'This will generate the nginx.conf file based on environment variables.'
@@ -42,8 +43,6 @@ class NginxConfGenerator < Rails::Generators::Base
   end
 
   def server_names
-    Tenant.all.inject([domain, "www.#{domain}"]) do |list, tenant|
-      list.push "#{tenant.subdomain}.#{domain}"
-    end
+    ServerNames.for(tenants: Tenant.all, domain: ENV['SERVER_DOMAIN'])
   end
 end
