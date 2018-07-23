@@ -31,7 +31,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-set :linked_files, ENV['SERVER_SHARED_FILES'].split(',')
+set :linked_files, ENV['SERVER_SHARED_FILES'].split(', ')
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
@@ -74,11 +74,13 @@ namespace :deploy do
   end
 
   desc 'Generate nginx.config'
-  task :generate_nginx_conf do
+  task generate_nginx_conf: [:set_rails_env] do
     on roles(:app) do
-      execute :bundle, 'exec rails g nginx_conf'
-      execute :nginx,  '-t'
-      execute :nginx,  '-s reload'
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, 'exec', 'rails g nginx_conf'
+        end
+      end
     end
   end
 

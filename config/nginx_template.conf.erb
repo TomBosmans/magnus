@@ -3,8 +3,8 @@ upstream puma {
 }
 
 server {
-  listen 80 443 default_server deferred;
-  server_name <%= server_names.join(', ') %>;
+  listen 80 default_server deferred;
+  Server_name <%= server_names.join(', ') %>;
 
   root <%= "/home/#{user}/apps/#{app_name}/current/public" %>;
   access_log <%= "/home/#{user}/apps/#{app_name}/current/log/nginx.access.log" %>;
