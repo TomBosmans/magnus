@@ -58,21 +58,6 @@ namespace :deploy do
     end
   end
 
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
-    end
-  end
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
-    end
-  end
-
   desc 'Generate nginx.config'
   task generate_nginx_conf: [:set_rails_env] do
     on roles(:app) do
@@ -84,9 +69,24 @@ namespace :deploy do
     end
   end
 
+  desc 'Initial Deploy'
+  task :initial do
+    on roles(:app) do
+      before 'deploy:restart', 'puma:start'
+      after  'finishing', 'generate_nginx_conf'
+      invoke 'deploy'
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
+    end
+  end
+
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
-  after  :finishing,    :generate_nginx_conf
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
