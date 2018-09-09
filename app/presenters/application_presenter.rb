@@ -1,6 +1,4 @@
-class ApplicationPresenter
-  include ActiveModel::Model
-
+class ApplicationPresenter < SimpleDelegator
   def action_buttons
     {}
   end

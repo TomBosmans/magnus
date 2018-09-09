@@ -1,7 +1,8 @@
+require 'content_manager'
+
 class Admin::ContentsController < AdminController
   def show
-    content = Content.find(params[:id])
-    @presenter = presenter_class.new(content)
+    @content = presenter_class.new(Content.find(params[:id]))
   end
 
   def new
@@ -9,11 +10,12 @@ class Admin::ContentsController < AdminController
   end
 
   def create
-    @form_object = form_object_class.new(content_form_params)
-    @content = @form_object.build_for(group)
+    @form_object, @content = create_servive_class.execute(
+      group: group,
+      form_object: form_object_class.new(content_form_params)
+    )
 
-    if @form_object.valid?(type_name => @content)
-      @content.save
+    if @content.persisted?
       redirect_to [:admin, @content]
     else
       render :new
@@ -26,9 +28,10 @@ class Admin::ContentsController < AdminController
   end
 
   def update
-    @content = Content.find(params[:id])
-    @form_object = form_object_class.new(content_form_params)
-    @content.attributes = @form_object.public_send("#{type_name}_attributes")
+    @form_object, @content = update_service_class.execute(
+      content: Content.find(params[:id]),
+      form_object: form_object_class.new(content_form_params)
+    )
 
     if @form_object.valid?(type_name => @content)
       @content.update_attributes(
@@ -43,8 +46,7 @@ class Admin::ContentsController < AdminController
 
   def destroy
     @content = Content.find(params[:id])
-    group = @content.group
-    @content.destroy
+    destroy_service_class.execute(content: @content)
     redirect_to [:admin, group]
   end
 
@@ -54,34 +56,32 @@ class Admin::ContentsController < AdminController
     @group ||= Group.find(params[:group_id])
   end
 
-  # example: "ArticleForm"
+  def manager
+    @manager ||= ContentManager.new(params[:type])
+  end
+
   def form_object_class
-    "#{type}Form".constantize
+    manager.form_object_class
   end
 
-  # example: "ArticlePresenter"
   def presenter_class
-    "#{type}Presenter".constantize
+    manager.presenter_class
   end
 
-  # example: "Article"
-  def type
-    params[:type]
+  def create_service_class
+    manager.create_service_class
   end
 
-  # example: Article
-  def type_class
-    type.constantize
+  def update_service_class
+    manager.update_service_class
   end
 
-  # example: "article"
-  def type_name
-    type.underscore
+  def destroy_service_class
+    manager.destroy_service_class
   end
 
   # The form objects filter all unwanted params.
   def content_form_params
-    form_param = "#{type_name}_form".to_sym
-    params.require(form_param).permit!
+    params.require(manager.form_param_key).permit!
   end
 end
