@@ -32,3 +32,6 @@ yarn-debug.log*
 /config/initializers/environment_variables.rb
 # this will be generated after deploying.
 /config/nginx.conf
+
+# Mac stuff
+.DS_Store
