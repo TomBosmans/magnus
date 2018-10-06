@@ -36,6 +36,7 @@ gem 'apartment'
 gem 'rack-cors'
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'annotate'
   gem 'erd'
   gem 'rubocop', '~> 0.55.0', require: false

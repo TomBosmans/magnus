@@ -128,6 +128,11 @@ GEM
       nokogiri
       rails-erd (>= 0.4.5)
     erubi (1.7.1)
+    factory_bot (4.11.1)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.11.1)
+      factory_bot (~> 4.11.1)
+      railties (>= 3.0.0)
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -282,6 +287,7 @@ DEPENDENCIES
   chromedriver-helper
   devise
   erd
+  factory_bot_rails
   form_object!
   groupable!
   jbuilder (~> 2.5)
