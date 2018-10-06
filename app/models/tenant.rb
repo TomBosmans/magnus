@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: public.tenants
+#
+#  id          :bigint(8)        not null, primary key
+#  name        :string
+#  description :string
+#  subdomain   :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Tenant < ApplicationRecord
   after_create :create_apartment_tenant
 
