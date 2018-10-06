@@ -24,7 +24,7 @@ class ContentTest < ActiveSupport::TestCase
       Article
     ]
 
-    assert_equal Content.subclasses, expected_classes
+    assert_equal Content.types, expected_classes
   end
 
   test 'can have a group' do

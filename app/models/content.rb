@@ -14,7 +14,11 @@
 class Content < ApplicationRecord
   include Groupable
 
+  POSSIBLE_TYPES = [
+    Article
+  ].freeze
+
   def self.types
-    @types ||= subclasses
+    POSSIBLE_TYPES
   end
 end
