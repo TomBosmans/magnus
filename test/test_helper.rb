@@ -21,4 +21,10 @@ def setup_tenant(subdomain:)
   host! "#{subdomain}.example.com:80"
 end
 
+def test_respond_to(object, methods)
+  methods.each do |method|
+    test "responds to #{method}" do
+      assert object.respond_to? method
+    end
+  end
 end
