@@ -1,4 +1,4 @@
-class ContentFrom < ApplicationFrom
+class ContentForm < ApplicationForm
   field :name
 
   def build_for(group)
