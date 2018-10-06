@@ -1,6 +1,6 @@
 require 'content_manager'
 
-class Admin::ContentsController < AdminController
+class Admin::Groups::ContentsController < AdminController
   def show
     @content = presenter_class.new(Content.find(params[:id]))
   end
@@ -56,32 +56,32 @@ class Admin::ContentsController < AdminController
     @group ||= Group.find(params[:group_id])
   end
 
-  def manager
+  def type_manager
     @manager ||= ContentManager.new(params[:type])
   end
 
   def form_object_class
-    manager.form_object_class
+    type_manager.form_object_class
   end
 
   def presenter_class
-    manager.presenter_class
+    type_manager.presenter_class
   end
 
   def create_service_class
-    manager.create_service_class
+    type_manager.create_service_class
   end
 
   def update_service_class
-    manager.update_service_class
+    type_manager.update_service_class
   end
 
   def destroy_service_class
-    manager.destroy_service_class
+    type_manager.destroy_service_class
   end
 
   # The form objects filter all unwanted params.
   def content_form_params
-    params.require(manager.form_param_key).permit!
+    params.require(type_manager.form_param_key).permit!
   end
 end

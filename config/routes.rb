@@ -1,4 +1,6 @@
-require './lib/subdomain_constraint.rb'
+require 'subdomain_constraint'
+require 'routes_helper'
+include RoutesHelper
 
 Rails.application.routes.draw do
   constraints SubdomainConstraint do
@@ -7,42 +9,23 @@ Rails.application.routes.draw do
     devise_for :users
 
     namespace :admin do
-      resources :dashboard, only: [:index]
-      resources :users, only: [:index, :new, :create, :destroy]
       resource :password, only: [:edit, :update]
 
-      Content.types.each do |klass|
-        resources klass.to_s.underscore.gsub('/', '_').pluralize,
-                  controller: 'contents',
-                  type: klass.to_s,
-                  except: [:index, :new, :create]
-      end
-
-      resources :groups, only: %w[show] do
-        Content.types.each do |klass|
-          resources klass.to_s.underscore.gsub('/', '_').pluralize,
-                    controller: 'contents',
-                    type: klass.to_s,
-                    only: [:new, :create]
-        end
+      resources :dashboard, only: [:index]
+      resources :users, only: [:index, :new, :create, :destroy]
+      resources :groups, only: [:show], module: 'groups' do
+        resources_content except: [:index]
       end
 
       admin_root_path = 'dashboard#index'
       root to: admin_root_path
-      # If a path does not exist we will return the user back to the admin root.
-      match '*path', to: admin_root_path, via: :all
+      return_non_existing_paths to: admin_root_path
     end
 
     namespace :api do
       namespace :v1 do
         resources :groups, only: [:show, :index]
-
-        Content.types.each do |klass|
-          resources klass.to_s.underscore.gsub('/', '_').pluralize,
-                    controller: 'contents',
-                    type: klass.to_s,
-                    only: [:show, :index]
-        end
+        resources_content only: [:show, :index]
       end
     end
   end
