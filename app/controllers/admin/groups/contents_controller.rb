@@ -57,7 +57,7 @@ class Admin::Groups::ContentsController < AdminController
   end
 
   def type_manager
-    @manager ||= ContentManager.new(params[:type])
+    @type_manager ||= ContentManager.new(params[:type])
   end
 
   def form_object_class
