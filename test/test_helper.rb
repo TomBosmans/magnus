@@ -12,6 +12,10 @@ class ActionDispatch::IntegrationTest
   def setup
     setup_tenant(subdomain: 'test-tenant')
   end
+
+  def user
+    @user ||= create(:user)
+  end
 end
 
 def setup_tenant(subdomain:)

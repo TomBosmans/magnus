@@ -13,6 +13,8 @@
 
 FactoryBot.define do
   factory :article do
+    group
+
     name { 'Lorem ipsum' }
     description { 'Lorem ipsum dolor sit amet.' }
     text { <<-TEXT
