@@ -8,15 +8,6 @@ module ApplicationHelper
   end
 
   def color_for(type)
-    case type.to_sym
-    when :error
-      'red'
-    when :alert
-      'orange'
-    when :success
-      'green'
-    else
-      nil
-    end
+    { error: 'red', alert: 'orange', success: 'green' }.fetch(type.to_sym, nil)
   end
 end
