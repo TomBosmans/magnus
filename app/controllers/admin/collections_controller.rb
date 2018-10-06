@@ -4,12 +4,5 @@ class Admin::CollectionsController < ApplicationController
     @collections = group.items
   end
 
-  def show
-  end
-
-  private
-
-  def group
-    @collections ||= Group.find_by(name: 'collections')
-  end
+  def show; end
 end
