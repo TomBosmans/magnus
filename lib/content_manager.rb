@@ -12,8 +12,8 @@ class ContentManager
 
   # example: ArticlePresenter
   def presenter_class
-    ContentPresenter unless presenter_class_for_type?
-    presenter_class_for_type.constantize
+    ContentPresenter unless presenter_for_type?
+    presenter_for_type.constantize
   end
 
   # example: Article::CreateService
@@ -45,7 +45,7 @@ class ContentManager
   end
 
   def presenter_for_type?
-    ApplicationPresenter.const_defined?(presenster_for_type)
+    ApplicationPresenter.const_defined?(presenter_for_type)
   end
 
   def create_service_for_type?
