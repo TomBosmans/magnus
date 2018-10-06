@@ -3,8 +3,22 @@ require_relative '../config/environment'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  include FactoryBot::Syntax::Methods
+end
 
-  # Add more helper methods to be used by all tests here...
+class ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
+  def setup
+    setup_tenant(subdomain: 'test-tenant')
+  end
+end
+
+def setup_tenant(subdomain:)
+  Tenant.find_by(subdomain: subdomain)&.destroy
+  Tenant.create(name: 'test', description: 'test', subdomain: subdomain)
+  Apartment::Tenant.switch!(subdomain)
+  host! "#{subdomain}.example.com:80"
+end
+
 end
