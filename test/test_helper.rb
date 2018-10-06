@@ -18,6 +18,7 @@ def setup_tenant(subdomain:)
   Tenant.find_by(subdomain: subdomain)&.destroy
   Tenant.create(name: 'test', description: 'test', subdomain: subdomain)
   Apartment::Tenant.switch!(subdomain)
+  Group.create(name: 'content')
   host! "#{subdomain}.example.com:80"
 end
 

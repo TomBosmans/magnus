@@ -9,7 +9,7 @@
       <ul class="right">
 	<%= component :dropdown, id: 'account', title: current_user.email do %>
 	  <li>
-	    <%= link_to edit_admin_user_password_path(user_id: current_user.id) do %>
+	    <%= link_to edit_admin_password_path do %>
 	      <i class="material-icons">edit</i><%= t('edit_profile') %>
 	    <% end %>
 	  </li>

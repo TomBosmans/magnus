@@ -8,9 +8,8 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :dashboard, only: [:index]
-      resources :users, only: [:index, :new, :create, :destroy] do
-        resource :password, only: [:edit, :update]
-      end
+      resources :users, only: [:index, :new, :create, :destroy]
+      resource :password, only: [:edit, :update]
 
       Content.types.each do |klass|
         resources klass.to_s.underscore.gsub('/', '_').pluralize,

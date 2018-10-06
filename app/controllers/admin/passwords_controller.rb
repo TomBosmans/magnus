@@ -1,4 +1,3 @@
-# NOTE: Right now every admin can change a users password.
 class Admin::PasswordsController < AdminController
   def edit
     @form_object = PasswordForm.new(user: user)
@@ -13,14 +12,14 @@ class Admin::PasswordsController < AdminController
       bypass_sign_in(user)
       redirect_to admin_root_path
     else
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 
   private
 
   def user
-    @user ||= User.find(params[:user_id])
+    current_user
   end
 
   def password_form_params
