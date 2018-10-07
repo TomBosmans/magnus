@@ -1,23 +1,32 @@
 class Content
   class UpdateService < ApplicationService
-    attr_accessor :content, :form_object
+    include TypeConcerns
 
-    def initialize(content:, form_object:)
+    def initialize(content, params)
       @content = content
-      @form_object = form_object
+      @params = params
     end
 
     def execute
+      @updated_content = update_content if valid?
+      content, form_object
     end
 
     private
 
+    attr_reader :content, :params, :updated_content
+
     def update_content
-      content.update_attributes(form_object.content_attributes)
+      content.update_attributes(form_object.public_send("#{type_name}_attributes"))
+    end
+
+    def form_object
+      @form_object ||=
+        form_object_class.new(type_name => content, params)
     end
 
     def valid?
-      @form_object.valid?(type_name => @content)
+      form_object.valid?(type_name => content)
     end
   end
 end

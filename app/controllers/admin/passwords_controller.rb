@@ -1,18 +1,19 @@
 class Admin::PasswordsController < AdminController
   def edit
-    @form_object = PasswordForm.new(user: user)
+    password_form= PasswordForm.new(user: user)
+    render locals: { form_object: password_form }
   end
 
   def update
-    @form_object = PasswordForm.new(password_form_params)
-    user.attributes = @form_object.user_attributes
+    password_form= PasswordForm.new(password_form_params)
+    user.attributes = password_form.user_attributes
 
-    if @form_object.valid?(user: user)
+    if password_form.valid?(user: user)
       user.save
       bypass_sign_in(user)
       redirect_to admin_root_path
     else
-      render :edit, status: :bad_request
+      render :edit, locals: { form_object: password_form }, status: :bad_request
     end
   end
 

@@ -1,28 +1,32 @@
 class Content
   class CreateService < ApplicationService
-    attr_accessor :content
+    include TypeConcern
 
-    def initialize(form_object:, group:)
-      @form_object = form_object
-      @group = group
+    def initialize(params, group: nil)
+      @params = params
+      @content = type_class.new(group: group)
     end
 
     def execute
       build_content
       save_content if valid?
-      return form_object, content
+      return content, form_object
     end
 
     private
 
-    attr_reader :form_object, :group
+    attr_reader :group, :params, :content
+
+    def form_object
+      @form_object ||= form_object_class.new(params)
+    end
 
     def build_content
-      form_object.build_for(group)
+      content.attributes = form_object.public_send("#{type_name}_attributes")
     end
 
     def valid?
-      form_object.valid?(content: content)
+      form_object.valid?(type_name => content)
     end
 
     def save_content

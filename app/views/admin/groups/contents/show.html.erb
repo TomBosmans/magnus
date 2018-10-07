@@ -1,0 +1,28 @@
+<% if content.action_buttons.many? %>
+  <%= component :action_button, icon: 'more_vert',
+                                actions: content.action_buttons %>
+<% elsif content.action_buttons.any? %>
+  <%= component :action_button, icon: content.action_buttons.values[0][:icon],
+                                path: content.action_buttons.values[0][:path],
+				options: content.action_buttons.values[0][:options] %>
+<% end %>
+
+<h4><%= content.name %></h4>
+<table class="show-table">
+  <thead>
+    <tr>
+      <% content.fields.each do |label, value| %>
+	<th><%= label %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% content.fields.each do |label, value| %>
+	<td><%= value %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<%== content.text %>

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   prepend_view_path Rails.root.join('frontend')
 
-  helper_method :content, :current_tenant
+  helper_method :content, :current_tenant,
+                :presenter_for, :form_object_for
 
   def content
     @content ||= Group.find_by(name: 'content').items

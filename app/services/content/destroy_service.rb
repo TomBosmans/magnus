@@ -1,6 +1,6 @@
 class Content
-  class DestroyService
-    def initialize(content:)
+  class DestroyService < ApplicationService
+    def initialize(content)
       @content = content
     end
 

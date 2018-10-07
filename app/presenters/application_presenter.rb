@@ -1,5 +1,5 @@
 class ApplicationPresenter < SimpleDelegator
-  def action_buttons
-    {}
+  def self.wrap(collection)
+    collection.map { |object| new object }
   end
 end

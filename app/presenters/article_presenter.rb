@@ -1,5 +1,2 @@
-class ArticlePresenter < ApplicationPresenter
-  def hallo
-    'world'
-  end
+class ArticlePresenter < ContentPresenter
 end
