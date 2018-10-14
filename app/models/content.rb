@@ -21,4 +21,6 @@ class Content < ApplicationRecord
   def self.types
     POSSIBLE_TYPES
   end
+
+  validates :name, presence: true
 end

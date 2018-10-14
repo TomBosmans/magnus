@@ -20,15 +20,15 @@
 
 require 'test_helper'
 
-class UserTest < ActiveSupport::TestCase
-  test_respond_to User.new, [:role, :email, :password, :possible_roles]
-  test_respond_to User.new, [:admin?, :creator?]
+describe User do
+  instance_responds_to :role, :email, :password, :possible_roles,
+                       :admin?, :creator?
 
-  test 'user is by default admin' do
+  it 'user is by default admin' do
     assert_equal User.new.role, 'admin'
   end
 
-  test 'role has to be in possible_roles' do
+  it 'role has to be in possible_roles' do
     user = create(:user)
     user.role = 'this is not in possible roles'
     assert_not user.valid?

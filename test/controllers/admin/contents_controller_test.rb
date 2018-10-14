@@ -1,94 +1,169 @@
 require 'test_helper'
 
-class Admin::Groups::ContentsControllerTest < ActionDispatch::IntegrationTest
+describe Admin::Groups::ContentsController do
   Content.types.each do |type|
-    def create_content(type)
-      create(singular_key(type))
-    end
+    before { @type = type }
 
-    def build_content(type)
-      build(singular_key(type))
-    end
+    context type.to_s do
+      describe 'GET #show' do
+        it 'responses with success' do
+          sign_in user
 
-    # :article
-    def singular_key(type)
-      type.to_s.underscore.to_sym
-    end
+          content = create_content
+          get url_for([:admin, content.group, content])
 
-    # :articles
-    def plural_key(type)
-      type.to_s.underscore.pluralize.to_sym
-    end
-
-    def group
-      @group ||= create(:group)
-    end
-
-    # Using the form factory to build a valid params hash
-    def build_params(type)
-      hash = build("#{singular_key(type)}_form").
-               public_send("#{singular_key(type)}_attributes")
-
-      hash = hash.each_with_object({}) do |(key, value), object|
-        object["#{singular_key(type)}_#{key}"] = value
+          assert_response :success
+        end
       end
 
-      { "#{singular_key(type)}_form".to_sym => hash }
+      describe 'GET #new' do
+        it 'responses with success' do
+          sign_in user
+
+          get url_for([:new, :admin, group, singular_key])
+          assert_response :success
+        end
+      end
+
+      describe 'POST #create' do
+        context 'valid params' do
+          it 'redirects to contents show page' do
+            sign_in user
+
+            post url_for([:admin, group, plural_key]),
+                 params: build_params
+
+            assert_redirected_to [:admin, group, Content.last]
+          end
+        end
+
+        context 'invalid params' do
+          it 'responses with bad request (400)' do
+            sign_in user
+
+            post url_for([:admin, group, plural_key]),
+                 params: params_with(name: nil)
+
+            assert_response :bad_request
+          end          
+        end
+      end
+
+      describe 'GET #edit' do
+        it 'responses with success (200)' do
+          sign_in user
+
+          content = create(singular_key)
+          get url_for([:edit, :admin, group, content])
+
+          assert_response :success
+        end
+      end
+
+      describe 'PATCH #update' do
+        context 'valid params' do
+          it 'redirects to contents show page' do
+            sign_in user
+
+            name = 'different name'
+            content = create(singular_key, name: 'a name')
+            patch url_for([:admin, group, content]),
+                  params: params_with(name: name)
+
+            assert_redirected_to [:admin, group, content]
+          end
+
+          it 'updated the content' do
+            sign_in user
+
+            name = 'different name'
+            content = create(singular_key, name: 'a name')
+            patch url_for([:admin, group, content]),
+                  params: params_with(name: name)
+
+            assert content.reload.name,
+                   name
+          end
+        end
+
+        context 'invalid params' do
+          it 'responses with bad request (400)' do
+            sign_in user
+
+            content = create(singular_key, name: 'a name')
+            patch url_for([:admin, group, content]),
+                  params: params_with(name: nil)
+
+            assert_response :bad_request
+          end
+        end
+      end
+
+      describe 'DELETE #destroy' do
+        it 'redirects to contents group index' do
+          sign_in user
+
+          content = create_content
+          delete url_for([:admin, group, content])
+
+          assert_redirected_to [:admin, group]
+        end
+
+        it 'deleted the content' do
+          sign_in user
+
+          content = create_content
+          delete url_for([:admin, group, content])
+
+          assert_nil Content.find_by(id: content.id)
+        end
+      end
     end
+  end
 
-    test "show for type #{type}" do
-      sign_in user
+  private
 
-      content = create_content(type)
-      get url_for([:admin, content.group, content])
-      assert_response :found
-    end
+  attr_reader :type
 
-    test "new for type #{type}" do
-      sign_in user
+  def create_content
+    create(singular_key)
+  end
 
-      get url_for([:new, :admin, group, singular_key(type)])
-      assert_response :success
-    end
+  def build_content
+    build(singular_key)
+  end
 
-    test "create for type #{type}" do
-      sign_in user
+  # :article
+  def singular_key
+    type.to_s.underscore.to_sym
+  end
 
-      post url_for([:admin, group, plural_key(type)]), params: build_params(type)
-      assert_redirected_to [:admin, group, Content.last]
-    end
+  # :articles
+  def plural_key
+    type.to_s.underscore.pluralize.to_sym
+  end
 
-    test "edit for type #{type}" do
-      sign_in user
+  def group
+    @group ||= create(:group)
+  end
 
-      content = create(singular_key(type))
-      get url_for([:edit, :admin, group, content])
-      assert_response :success
-    end
-
-    test "update for type #{type}" do
-      sign_in user
-
-      name = 'different name'
-      content = create(singular_key(type), name: name)
-      params = {
-        "#{singular_key(type)}_form".to_sym => {
-          "#{singular_key(type)}_name".to_sym => name
-        }
+  def params_with(name:)
+    params = {
+      "#{singular_key}_form" => {
+        "#{singular_key}_name": name
       }
+    }
+  end
 
-      get url_for([:admin, group, content]), params: params
-      assert_redirected_to [:admin, group, content]
-      assert_equal content.reload.name, name
+  # Using the form factory to build a valid params hash
+  def build_params
+    hash = build("#{singular_key}_form").
+             public_send("#{singular_key}_attributes")
+
+    hash = hash.each_with_object({}) do |(key, value), object|
+      object["#{singular_key}_#{key}"] = value
     end
 
-    test "destroy for type #{type}" do
-      sign_in user
-
-      content = create_content(type)
-      delete url_for([:admin, group, content])
-      assert_redirected_to [:admin, group]
-      assert_nil Content.find_by(id: content.id)
-    end
+    { "#{singular_key}_form".to_sym => hash }
   end
 end

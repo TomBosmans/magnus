@@ -1,7 +1,7 @@
 class Admin::Groups::ContentsController < AdminController
   def show
     content = presenter_for(type_class.find(params[:id]))
-    render locals: { content: content }, status: :found
+    render locals: { content: content }
   end
 
   def new
@@ -14,7 +14,8 @@ class Admin::Groups::ContentsController < AdminController
     if content.persisted?
       redirect_to [:admin, group, content]
     else
-      render :new, locals: { form_object: content_form }
+      render :new, locals: { form_object: content_form },
+             status: :bad_request
     end
   end
 
@@ -28,7 +29,8 @@ class Admin::Groups::ContentsController < AdminController
     if content.errors.empty?
       redirect_to [:admin, group, content]
     else
-      render :edit, locals: { form_object: content_form }
+      render :edit, locals: { form_object: content_form },
+             status: :bad_request
     end
   end
 

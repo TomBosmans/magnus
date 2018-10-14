@@ -12,30 +12,30 @@
 
 require 'test_helper'
 
-class TenantTest < ActiveSupport::TestCase
-  test_respond_to Tenant.new, [:name, :description, :subdomain]
+describe Tenant do
+  instance_responds_to :name, :description, :subdomain
 
-  test 'valid tenant' do
+  it 'valid tenant' do
     tenant = Tenant.new(name: 'valid', description: 'valid', subdomain: 'valid')
     assert tenant.valid?
   end
 
-  test 'name is required' do
+  it 'name is required' do
     tenant = Tenant.new(description: 'test', subdomain: 'test')
     assert_not tenant.valid?
   end
 
-  test 'description is required' do
+  it 'description is required' do
     tenant = Tenant.new(name: 'test', subdomain: 'test')
     assert_not tenant.valid?
   end
 
-  test 'subdomain is required' do
+  it 'subdomain is required' do
     tenant = Tenant.new(name: 'test', description: 'test')
     assert_not tenant.valid?
   end
 
-  test 'subdomain has to be unique' do
+  it 'subdomain has to be unique' do
     Tenant.create(name: 'test1', description: 'test1', subdomain: 'not-uniq')
     tenant = Tenant.new(name: 'test2', description: 'test2', subdomain: 'not-uniq')
     assert_not tenant.valid?

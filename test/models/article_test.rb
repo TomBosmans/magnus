@@ -13,10 +13,10 @@
 
 require 'test_helper'
 
-class ArticleTest < ActiveSupport::TestCase
-  test_respond_to Article.new, [:description, :text]
+describe Article do
+  instance_responds_to :description, :text
 
-  test 'type is Article' do
+  it 'type is Article' do
     assert_equal Article.new.type, 'Article'
   end
 end

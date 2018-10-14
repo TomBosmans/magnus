@@ -13,13 +13,13 @@
 
 require 'test_helper'
 
-class ContentTest < ActiveSupport::TestCase
-  test_respond_to Content, [:types]
-  test_respond_to Content.new, [:name, :type, :fields, :options, :group]
+describe Content do
+  class_responds_to :types
+  instance_responds_to :name, :type, :fields, :options, :group
 
   # Keep expected classes up to date.
   # This test might be removed in the future.
-  test 'types returns expected classes' do
+  it 'types returns expected classes' do
     expected_classes = [
       Article
     ]
@@ -27,7 +27,7 @@ class ContentTest < ActiveSupport::TestCase
     assert_equal Content.types, expected_classes
   end
 
-  test 'can have a group' do
+  it 'can have a group' do
     content = create(:content)
     content.group = create(:group)
     assert content.group.present?
