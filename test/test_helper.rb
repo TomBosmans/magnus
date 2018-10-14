@@ -51,10 +51,19 @@ class ActionDispatch::IntegrationTest
   end
 
   def setup_tenant(subdomain:)
-    Tenant.find_by(subdomain: subdomain)&.destroy
-    Tenant.create(name: 'test', description: 'test', subdomain: subdomain)
+    # If tenant already exists we destroy it first
+    Tenant::DestroyService.execute(
+      Tenant.find_by(subdomain: subdomain)
+    )
+    # Create our tenant
+    Tenant::CreateService.execute(
+      name: 'test',
+      description: 'test',
+      subdomain: subdomain
+    )
+    # Switch to tenant schema
     Apartment::Tenant.switch!(subdomain)
-    Group.create(name: 'content')
+    # Set the host subdomain
     host! "#{subdomain}.example.com:80"
   end
 end

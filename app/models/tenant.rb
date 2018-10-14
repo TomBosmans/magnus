@@ -11,9 +11,6 @@
 #
 
 class Tenant < ApplicationRecord
-  after_create :create_apartment_tenant
-  before_destroy :drop_apartment_tenant
-
   validates :name,
             presence: true
 
@@ -23,14 +20,4 @@ class Tenant < ApplicationRecord
   validates :subdomain,
             presence: true,
             uniqueness: true
-
-  private
-
-  def create_apartment_tenant
-    Apartment::Tenant.create(subdomain)
-  end
-
-  def drop_apartment_tenant
-    Apartment::Tenant.drop(subdomain)
-  end
 end
