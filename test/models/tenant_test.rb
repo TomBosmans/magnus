@@ -15,29 +15,35 @@ require 'test_helper'
 describe Tenant do
   instance_responds_to :name, :description, :subdomain
 
-  it 'valid tenant' do
+  it 'is valid' do
     tenant = Tenant.new(name: 'valid', description: 'valid', subdomain: 'valid')
     assert tenant.valid?
   end
 
-  it 'name is required' do
-    tenant = Tenant.new(description: 'test', subdomain: 'test')
-    assert_not tenant.valid?
+  describe '#name' do
+    it 'is required' do
+      tenant = Tenant.new(description: 'test', subdomain: 'test')
+      assert_not tenant.valid?
+    end
   end
 
-  it 'description is required' do
-    tenant = Tenant.new(name: 'test', subdomain: 'test')
-    assert_not tenant.valid?
+  describe '#description' do
+    it 'is required' do
+      tenant = Tenant.new(name: 'test', subdomain: 'test')
+      assert_not tenant.valid?
+    end
   end
 
-  it 'subdomain is required' do
-    tenant = Tenant.new(name: 'test', description: 'test')
-    assert_not tenant.valid?
-  end
+  describe '#subdomain' do
+    it 'is required' do
+      tenant = Tenant.new(name: 'test', description: 'test')
+      assert_not tenant.valid?
+    end
 
-  it 'subdomain has to be unique' do
-    Tenant.create(name: 'test1', description: 'test1', subdomain: 'not-uniq')
-    tenant = Tenant.new(name: 'test2', description: 'test2', subdomain: 'not-uniq')
-    assert_not tenant.valid?
+    it 'has to be unique' do
+      Tenant.create(name: 'test1', description: 'test1', subdomain: 'not-uniq')
+      tenant = Tenant.new(name: 'test2', description: 'test2', subdomain: 'not-uniq')
+      assert_not tenant.valid?
+    end
   end
 end

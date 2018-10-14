@@ -19,17 +19,25 @@ describe Content do
 
   # Keep expected classes up to date.
   # This test might be removed in the future.
-  it 'types returns expected classes' do
-    expected_classes = [
-      Article
-    ]
+  describe '.types' do
+    it 'returns expected classes' do
+      expected_classes = [
+        Article
+      ]
 
-    assert_equal Content.types, expected_classes
+      assert_equal described_class.types, expected_classes
+    end
   end
 
-  it 'can have a group' do
-    content = create(:content)
-    content.group = create(:group)
-    assert content.group.present?
+  describe '#group' do
+    it 'can have a group' do
+      content = create(:content, group: create(:group))
+      assert content.group.present?
+    end
+
+    it 'can be empty' do
+      content = create(:content, group: nil)
+      assert_nil content.group
+    end
   end
 end

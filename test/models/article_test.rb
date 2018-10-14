@@ -16,7 +16,9 @@ require 'test_helper'
 describe Article do
   instance_responds_to :description, :text
 
-  it 'type is Article' do
-    assert_equal Article.new.type, 'Article'
+  describe '#type' do
+    it 'returns is Article' do
+      assert_equal described_class.new.type, 'Article'
+    end
   end
 end

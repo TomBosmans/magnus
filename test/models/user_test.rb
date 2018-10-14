@@ -24,13 +24,15 @@ describe User do
   instance_responds_to :role, :email, :password, :possible_roles,
                        :admin?, :creator?
 
-  it 'user is by default admin' do
-    assert_equal User.new.role, 'admin'
-  end
+  describe '#role' do
+    it 'is by default admin' do
+      assert_equal User.new.role, 'admin'
+    end
 
-  it 'role has to be in possible_roles' do
-    user = create(:user)
-    user.role = 'this is not in possible roles'
-    assert_not user.valid?
+    it 'role has to be in possible_roles' do
+      user = create(:user)
+      user.role = 'this is not in possible roles'
+      assert_not user.valid?
+    end
   end
 end
