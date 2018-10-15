@@ -1,2 +1,4 @@
-<h4><%= @group.name %></h4>
-<%= component :table, table_object: @table_object %>
+<h4><%= group.name %></h4>
+
+<% group_table = GroupTable.new(resources: group.items, group: group) %>
+<%= component :table, table_object: group_table %>
