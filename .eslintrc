@@ -13,7 +13,8 @@
   },
 
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-param-reassign": 0
   },
 
   "parser": "babel-eslint",

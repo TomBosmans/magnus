@@ -1,0 +1,2 @@
+<%= form.label field.full_name, field.label %>
+<%= form.text_area field.full_name, class: "materialize-textarea markdown #{'invalid' if invalid} #{field.options[:css_class]}", data: field.options[:data] %>
