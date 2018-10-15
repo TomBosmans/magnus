@@ -14,6 +14,15 @@ describe Admin::Groups::ContentsController do
 
           assert_response :success
         end
+
+        it 'does not require a group' do
+          sign_in user
+
+          content = create_content
+          get url_for([:admin, content])
+
+          assert_response :success
+        end
       end
 
       describe 'GET #new' do

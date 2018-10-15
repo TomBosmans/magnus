@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
       resources :dashboard, only: [:index]
       resources :users, only: [:index, :new, :create, :destroy]
+      resources_content only: [:show], module: 'groups'
       resources :groups, only: [:show] do
         resources_content except: [:index], module: 'groups'
       end
