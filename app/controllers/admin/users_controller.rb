@@ -1,22 +1,24 @@
 class Admin::UsersController < AdminController
   def index
     users = User.all
-    @table_object = UserTable.new(users)
+    user_table = UserTable.new(users)
+    render locals: { table_object: user_table }
   end
 
   def new
-    @form_object = UserForm.new
+    user_form= UserForm.new
+    render locals: { form_object: user_form }
   end
 
   def create
-    @form_object = UserForm.new(user_form_params)
-    @user = User.new(@form_object.user_attributes)
+    user_form = UserForm.new(user_form_params)
+    user = User.new(user_form.user_attributes)
 
-    if @form_object.valid?(user: @user)
-      @user.save
+    if user_form.valid?(user: user)
+      user.save
       redirect_to [:admin, :users]
     else
-      render :new
+      render :new, locals: { form_object: user_form }, status: :bad_request
     end
   end
 
