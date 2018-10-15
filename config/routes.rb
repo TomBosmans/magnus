@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
       resources :dashboard, only: [:index]
       resources :users, only: [:index, :new, :create, :destroy]
-      resources :groups, only: [:show], module: 'groups' do
-        resources_content except: [:index]
+      resources :groups, only: [:show] do
+        resources_content except: [:index], module: 'groups'
       end
 
       admin_root_path = 'dashboard#index'
