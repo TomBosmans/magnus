@@ -15,7 +15,9 @@ class ActiveSupport::TestCase
   end
 
   def self.controller_test?(klass)
-    klass < ActionController::Base if klass.is_a? Class
+    return unless klass.is_a? Class
+    klass < ActionController::Base ||
+      klass < ActionController::API
   end
 
   def self.instance_responds_to(*methods)
