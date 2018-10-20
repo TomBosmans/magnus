@@ -25,8 +25,8 @@ Rails.application.routes.draw do
 
     namespace :api do
       namespace :v1 do
-        resources :groups, only: [:show, :index]
-        resources_content only: [:show, :index]
+        resources :groups, only: [:show, :index], defaults: { format: :json }
+        resources_content only: [:show, :index], defaults: { format: :json }
       end
     end
   end
