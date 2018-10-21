@@ -86,6 +86,7 @@ describe Api::V1::ContentsController do
 
   def assert_creator(json, creator)
     assert_equal json['id'], creator.id
+    assert_equal json['name'], creator.name
     assert_equal json['email'], creator.email
   end
 end
