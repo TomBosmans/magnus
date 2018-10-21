@@ -14,6 +14,7 @@
 FactoryBot.define do
   factory :article do
     group
+    association :creator, factory: :user
 
     name { 'Lorem ipsum' }
     description { 'Lorem ipsum dolor sit amet.' }

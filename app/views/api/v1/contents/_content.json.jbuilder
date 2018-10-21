@@ -10,3 +10,7 @@ end
 
 json.created_at content.created_at
 json.updated_at content.updated_at
+
+json.creator do
+  json.partial! 'api/v1/users/user', user: content.creator
+end

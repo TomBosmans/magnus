@@ -53,10 +53,6 @@ class ActionDispatch::IntegrationTest
   end
 
   def setup_tenant(subdomain:)
-    # If tenant already exists we destroy it first
-    Tenant::DestroyService.execute(
-      Tenant.find_by(subdomain: subdomain)
-    )
     # Create our tenant
     Tenant::CreateService.execute(
       name: 'test',

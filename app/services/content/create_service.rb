@@ -2,9 +2,9 @@ class Content
   class CreateService < ApplicationService
     include TypeConcern
 
-    def initialize(params, group: nil)
+    def initialize(params, group: nil, creator: nil)
       @params = params
-      @content = type_class.new(group: group)
+      @content = type_class.new(group: group, creator: creator)
     end
 
     def execute

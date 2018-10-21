@@ -10,7 +10,7 @@ class Admin::Groups::ContentsController < AdminController
   end
 
   def create
-    content, content_form = create_service_class.execute(content_form_params, group: group)
+    content, content_form = create_service_class.execute(content_form_params, group: group, creator: current_user)
     if content.persisted?
       redirect_to [:admin, group, content]
     else

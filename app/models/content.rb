@@ -13,6 +13,7 @@
 
 class Content < ApplicationRecord
   include Groupable
+  belongs_to :creator, class_name: 'User'
 
   POSSIBLE_TYPES = [
     Article
@@ -22,5 +23,5 @@ class Content < ApplicationRecord
     POSSIBLE_TYPES
   end
 
-  validates :name, presence: true
+  validates :name, :creator, presence: true
 end

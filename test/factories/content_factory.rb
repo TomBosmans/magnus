@@ -15,5 +15,6 @@ FactoryBot.define do
   factory :content do
     name { 'my content' }
     group
+    association :creator, factory: :user
   end
 end
