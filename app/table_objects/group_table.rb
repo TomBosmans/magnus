@@ -20,16 +20,16 @@ class GroupTable < ApplicationTable
 
   resource_action :show,
                   icon: 'visibility',
-                  path: ->(resource) { [:admin, resource] }
+                  path: ->(resource) { [:admin, group, resource] }
 
   resource_action :edit,
                   icon: 'edit',
-                  path: ->(resource) { [:edit, :admin, resource] }
+                  path: ->(resource) { [:edit, :admin, group, resource] }
 
   resource_action :destroy,
                   icon: 'delete',
                   css_class: 'red-text',
-                  path: ->(resource) { [:admin, resource] },
+                  path: ->(resource) { [:admin, group, resource] },
                   method: 'DELETE'
 
   table_action :new_article,
